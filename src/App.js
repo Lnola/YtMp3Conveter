@@ -15,7 +15,13 @@ const App = () => {
     //   );
     // window.location.href = `http://localhost:5000/api/aaa?URL=${input}`;
 
-    Axios.get(`/api/aaa?URL=${input}`).then((res) => console.log(res));
+    Axios.get(`/api/aaa?URL=${input}`).then((res) => {
+      console.log(res.data);
+
+      window.location.href = `http://localhost:5000/api/one?info=${JSON.stringify(
+        res.data
+      )}`;
+    });
   };
 
   console.log(videos);

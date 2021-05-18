@@ -8,6 +8,11 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 
+app.get("/api/one", (req, res) => {
+  const info = req.query.info;
+  console.log(info);
+});
+
 app.get("/api/aaa", (req, res) => {
   const URL = req.query.URL;
 
@@ -15,9 +20,9 @@ app.get("/api/aaa", (req, res) => {
 
   // const info=
 
-  // ytdl(URL, {
-  //   format: "mp3",
-  // }).pipe(res);
+  ytdl(URL, {
+    format: "mp3",
+  }).pipe(res);
 });
 
 app.get("/api/download", (req, res) => {
