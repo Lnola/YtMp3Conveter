@@ -22,4 +22,4 @@ logs
 .env.*
 !.env.example
 
-audio/
+public/audio/
