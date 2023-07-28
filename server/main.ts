@@ -15,6 +15,9 @@ ffmpeg(stream)
   .on('end', () => {
     console.log('Finished converting to MP3 format.');
   })
+  .addOutputOption('-metadata', 'title="Stairway to Heaven"')
+  .addOutputOption('-metadata', 'artist="Zepp"')
+  .addOutputOption('-metadata', 'album="These ones"')
   .pipe(fs.createWriteStream(outputFile))
   .on('error', (err) => {
     console.error('An error occurred while saving the file:', err.message);
