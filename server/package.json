@@ -4,6 +4,7 @@
   "description": "",
   "main": "main.ts",
   "scripts": {
+    "preinstall": "brew list ffmpeg &>/dev/null || brew install ffmpeg",
     "dev": "nodemon main.ts"
   },
   "author": "",
