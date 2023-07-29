@@ -1,7 +1,8 @@
 <template>
   <div class="relative z-0 mt-2">
     <input
-      v-model="input"
+      @input="updateModelValue"
+      :value="modelValue"
       :id="name"
       :aria-describedby="helpLabel"
       type="text"
@@ -21,12 +22,18 @@
 </template>
 
 <script setup lang="ts">
+const emit = defineEmits(['update:modelValue']);
 const props = defineProps({
+  modelValue: { type: String, required: true },
   name: { type: String, required: true },
   label: { type: String, required: true },
   helpText: { type: String, default: null },
 });
 
-const input = ref(null);
 const helpLabel = computed(() => props.helpText && `${props.name}-help`);
+
+const updateModelValue = (event: Event) => {
+  const { value } = event.target as HTMLInputElement;
+  emit('update:modelValue', value);
+};
 </script>

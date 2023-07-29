@@ -1,8 +1,7 @@
 <template>
-  <!-- <TextField name="video-link" label="Youtube video link" /> -->
-  <a href="/audio.mp3" download="audio.mp3">{{ data }}</a>
+  <TextField v-model="input" name="video-link" label="Youtube video link" />
 </template>
 
 <script setup lang="ts">
-const { data } = await useFetch('/api/download');
+const input = ref('');
 </script>
