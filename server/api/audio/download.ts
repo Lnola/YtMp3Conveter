@@ -10,8 +10,8 @@ export default defineEventHandler((event) => {
 
   ffmpeg(stream)
     .toFormat('mp3')
-    .on('error', (err) => {
-      console.error('An error occurred:', err.message);
+    .on('error', (error) => {
+      console.error('An error occurred:', error.message);
     })
     .on('end', () => {
       console.log('Finished converting to MP3 format.');
@@ -20,8 +20,8 @@ export default defineEventHandler((event) => {
     .addOutputOption('-metadata', 'artist="Zepp"')
     .addOutputOption('-metadata', 'album="These ones"')
     .pipe(fs.createWriteStream(outputFile))
-    .on('error', (err) => {
-      console.error('An error occurred while saving the file:', err.message);
+    .on('error', (error) => {
+      console.error('An error occurred while saving the file:', error.message);
     })
     .on('finish', () => {
       console.log('File saved successfully.');
