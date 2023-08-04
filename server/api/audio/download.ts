@@ -1,9 +1,9 @@
 import fs from 'fs';
 import ytdl from 'ytdl-core';
 import ffmpeg from 'fluent-ffmpeg';
-import { MetadataDto } from '../../../types/audio';
+import { Metadata } from '../../../types/audio';
 
-type Query = MetadataDto;
+type Query = Metadata;
 
 export default defineEventHandler((event) => {
   const { videoUrl, artist, category, title } = getQuery(event) as Query;

@@ -1,12 +1,13 @@
-import { MetadataDto } from 'types/audio';
+import { Metadata } from 'types/audio';
 
-const initMetadata = (): MetadataDto => ({
+const initMetadata = (): Metadata => ({
   videoUrl: '',
+  album: '',
   artist: '',
   category: '',
+  filename: '',
   thumbnail: '',
   title: '',
 });
 
-export const useMetadata = () =>
-  useState<MetadataDto>('metadata', initMetadata);
+export const useMetadata = () => useState<Metadata>('metadata', initMetadata);
