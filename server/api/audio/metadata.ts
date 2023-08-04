@@ -1,14 +1,8 @@
 import ytdl from 'ytdl-core';
+import { MetadataDto } from '../../../types/audio';
 
-type Query = {
+export type Query = {
   videoUrl: string;
-};
-
-type MetadataDto = {
-  artist: string;
-  category: string;
-  thumbnail: string;
-  title: string;
 };
 
 export default defineEventHandler(async (event): Promise<MetadataDto> => {
