@@ -1,10 +1,13 @@
 import fs from 'fs';
 import ytdl from 'ytdl-core';
 import ffmpeg from 'fluent-ffmpeg';
+import { MetadataDto } from '../../../types/audio';
+
+type Query = MetadataDto;
 
 export default defineEventHandler((event) => {
-  const outputFile = 'public/audio.mp3';
-  const videoUrl = 'https://www.youtube.com/watch?v=xvFZjo5PgG0';
+  const { videoUrl, artist, category, title } = getQuery(event) as Query;
+  const outputFile = `public/audio/${title}.mp3`;
 
   const stream = ytdl(videoUrl, { filter: 'audioonly' });
 
@@ -16,9 +19,10 @@ export default defineEventHandler((event) => {
     .on('end', () => {
       console.log('Finished converting to MP3 format.');
     })
-    .addOutputOption('-metadata', 'title="Stairway to Heaven"')
-    .addOutputOption('-metadata', 'artist="Zepp"')
-    .addOutputOption('-metadata', 'album="These ones"')
+    .addOutputOption('-metadata', `artist="${artist}"`)
+    .addOutputOption('-metadata', `category="${category}"`)
+    .addOutputOption('-metadata', `title="${title}"`)
+    // .addOutputOption('-metadata', 'album="These ones"')
     .pipe(fs.createWriteStream(outputFile))
     .on('error', (error) => {
       console.error('An error occurred while saving the file:', error.message);
@@ -27,5 +31,5 @@ export default defineEventHandler((event) => {
       console.log('File saved successfully.');
     });
 
-  return { stream: '/converted/audio.mp3' };
+  return { stream: `/audio/${title}.mp3` };
 });

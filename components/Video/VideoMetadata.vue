@@ -12,6 +12,8 @@
 const metadata = useMetadata();
 
 const submit = async () => {
-  console.log(metadata.value);
+  const query = { ...metadata.value };
+  const data = await $fetch('/api/audio/download', { query });
+  console.log(data);
 };
 </script>
