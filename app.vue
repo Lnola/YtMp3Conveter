@@ -4,7 +4,7 @@
   <VideoMetadata v-if="shouldDisplayMetadata" />
 </template>
 
-<script setup>
+<script setup lang="ts">
 const isLoading = ref(false);
 const metadata = useMetadata();
 const shouldDisplayMetadata = computed(() => metadata.value.artist.length > 0);
