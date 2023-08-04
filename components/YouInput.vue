@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-const emit = defineEmits(['update:modelValue']);
+const emits = defineEmits(['update:modelValue']);
 const props = defineProps({
   modelValue: { type: String, required: true },
   name: { type: String, required: true },
@@ -34,6 +34,6 @@ const helpLabel = computed(() => props.helpText && `${props.name}-help`);
 
 const updateModelValue = (event: Event) => {
   const { value } = event.target as HTMLInputElement;
-  emit('update:modelValue', value);
+  emits('update:modelValue', value);
 };
 </script>
