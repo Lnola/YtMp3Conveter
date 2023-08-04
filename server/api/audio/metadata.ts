@@ -11,5 +11,5 @@ export default defineEventHandler(async (event): Promise<MetadataDto> => {
   const { author, category, thumbnails, title } = videoDetails;
   const artist = author.name;
   const thumbnail = thumbnails[thumbnails.length - 1].url;
-  return { artist, category, thumbnail, title };
+  return { videoUrl, artist, category, thumbnail, title };
 });

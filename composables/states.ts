@@ -1,6 +1,7 @@
 import { MetadataDto } from 'types/audio';
 
 const initMetadata = (): MetadataDto => ({
+  videoUrl: '',
   artist: '',
   category: '',
   thumbnail: '',
