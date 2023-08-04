@@ -1,7 +1,11 @@
 <template>
-  <TextField v-model="input" name="video-link" label="Youtube video link" />
+  <VideoUrl @fetching="isLoading = $event" />
+  <YouLoader v-if="isLoading" />
+  <VideoMetadata v-if="shouldDisplayMetadata" />
 </template>
 
-<script setup lang="ts">
-const input = ref('');
+<script setup>
+const isLoading = ref(false);
+const metadata = useMetadata();
+const shouldDisplayMetadata = computed(() => metadata.value.artist.length > 0);
 </script>
