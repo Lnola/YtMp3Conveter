@@ -15,7 +15,7 @@ const submit = async () => {
   emits('fetching', true);
   const query = { videoUrl: videoUrl.value };
   const data = await $fetch('/api/audio/metadata', { query });
-  metadata.value = data;
+  metadata.value = { ...metadata.value, ...data };
   videoUrl.value = '';
   emits('fetching', false);
 };
