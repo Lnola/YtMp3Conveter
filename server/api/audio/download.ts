@@ -1,38 +1,46 @@
-import fs from 'fs';
 import ytdl from 'ytdl-core';
 import ffmpeg from 'fluent-ffmpeg';
+import { Readable } from 'stream';
 import { Metadata } from '../../../types/audio';
 
 type Query = Metadata;
 
-export default defineEventHandler((event) => {
-  const { videoUrl, artist, album, category, filename, title } = getQuery(
-    event
-  ) as Query;
-  const outputFile = `public/audio/${filename}.mp3`;
+const formatAndSaveFile = (
+  stream: Readable,
+  metadata: Omit<Query, 'videoUrl' | 'filename'>,
+  outputFile: string
+) => {
+  return new Promise<void>((resolve, reject) =>
+    ffmpeg(stream)
+      .toFormat('mp3')
+      .on('error', (error) => {
+        console.error('An error occurred formatting the file:', error.message);
+        reject(error.message);
+      })
+      .on('end', () => {
+        console.log('Finished converting to MP3 format.');
+      })
+      .addOutputOption('-metadata', `artist="${metadata.artist}"`)
+      .addOutputOption('-metadata', `album="${metadata.album}"`)
+      .addOutputOption('-metadata', `category="${metadata.category}"`)
+      .addOutputOption('-metadata', `title="${metadata.title}"`)
+      // TODO: add a job to delete the file after x time
+      .saveToFile(`public/${outputFile}`)
+      .on('error', (error) => {
+        console.error('An error occurred saving the file:', error.message);
+        reject(error.message);
+      })
+      .on('end', () => {
+        console.log('File saved successfully.');
+        resolve();
+      })
+  );
+};
 
+export default defineEventHandler(async (event) => {
+  const { videoUrl, filename, ...query } = getQuery(event) as Query;
+  const outputFile = `/audio/${filename}.mp3`;
   const stream = ytdl(videoUrl, { filter: 'audioonly' });
-
-  ffmpeg(stream)
-    .toFormat('mp3')
-    .on('error', (error) => {
-      console.error('An error occurred:', error.message);
-    })
-    .on('end', () => {
-      console.log('Finished converting to MP3 format.');
-    })
-    .addOutputOption('-metadata', `artist="${artist}"`)
-    .addOutputOption('-metadata', `album="${album}"`)
-    .addOutputOption('-metadata', `category="${category}"`)
-    .addOutputOption('-metadata', `title="${title}"`)
-    // .addOutputOption('-metadata', 'album="These ones"')
-    .pipe(fs.createWriteStream(outputFile))
-    .on('error', (error) => {
-      console.error('An error occurred while saving the file:', error.message);
-    })
-    .on('finish', () => {
-      console.log('File saved successfully.');
-    });
-
-  return { stream: `/audio/${filename}.mp3` };
+  await formatAndSaveFile(stream, query, outputFile);
+  return { outputFile };
 });
