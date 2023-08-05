@@ -5,7 +5,7 @@
     <YouInput v-model="metadata.category" name="category" label="Category" />
     <YouInput v-model="metadata.filename" name="filename" label="Filename" />
     <YouInput v-model="metadata.title" name="title" label="Title" />
-    <YouThumbnail v-model="metadata.thumbnail" />
+    <!-- <YouThumbnail v-model="metadata.thumbnail" /> -->
     <YouButton type="submit">Submit</YouButton>
   </form>
 </template>
