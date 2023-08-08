@@ -24,6 +24,8 @@ const formatAndSaveFile = (
       .addOutputOption('-metadata', `album="${metadata.album}"`)
       .addOutputOption('-metadata', `category="${metadata.category}"`)
       .addOutputOption('-metadata', `title="${metadata.title}"`)
+      .addOutputOption('-metadata', `year="${metadata.year}"`)
+      .addOutputOption('-metadata', `genre="${metadata.genre}"`)
       // TODO: add a job to delete the file after x time
       .saveToFile(`public/${outputFile}`)
       .on('error', (error) => {
