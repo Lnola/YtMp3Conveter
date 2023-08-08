@@ -40,13 +40,8 @@ const metadataRef = ref<Nullable<HTMLElement>>(null);
 const downloadRef = ref<Nullable<HTMLElement>>(null);
 const { x: _, y: scrollHeight } = useScroll(scrollRef, { behavior: 'smooth' });
 
-const scrollIntoMetadata = () => {
-  scrollHeight.value = window.innerHeight;
-};
-
-const scrollIntoDownload = () => {
-  scrollHeight.value = window.innerHeight * 2;
-};
+const scrollIntoMetadata = () => (scrollHeight.value = window.innerHeight);
+const scrollIntoDownload = () => (scrollHeight.value = window.innerHeight * 2);
 
 watch(metadataRef, scrollIntoMetadata);
 watch(downloadRef, scrollIntoDownload);
