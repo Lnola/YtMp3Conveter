@@ -1,4 +1,5 @@
-import { Metadata } from 'types/audio';
+import { DownloadFile, Metadata } from 'types/audio';
+import { Nullable } from 'types/helper';
 
 const initMetadata = (): Metadata => ({
   videoUrl: '',
@@ -10,4 +11,9 @@ const initMetadata = (): Metadata => ({
   title: '',
 });
 
+const initDownloadFile = (): Nullable<DownloadFile> => null;
+
 export const useMetadata = () => useState<Metadata>('metadata', initMetadata);
+
+export const useDownloadFile = () =>
+  useState<Nullable<DownloadFile>>('download-file', initDownloadFile);
