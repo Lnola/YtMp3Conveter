@@ -1,3 +1,4 @@
+<!-- TODO: add thumbnail to metadata -->
 <template>
   <div class="relative flex items-center w-48 h-48 bg-blue-700 cursor-pointer">
     <img @click="select" :src="modelValue" alt="thumbnail" class="w-100%" />
