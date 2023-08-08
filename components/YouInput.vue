@@ -1,5 +1,5 @@
 <template>
-  <div class="relative z-0 mt-2">
+  <div v-bind="$attrs" class="relative z-0 mt-2">
     <input
       @input="updateModelValue"
       :value="modelValue"
