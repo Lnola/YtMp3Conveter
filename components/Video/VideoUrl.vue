@@ -7,10 +7,10 @@
       v-model="videoUrl"
       name="video-link"
       label="Youtube video link"
-      class="mb-8 w-full"
+      class="mb-6 w-full"
     />
-    <YouToggle v-model="shouldAddMetadata" name="toggle-metadata">
-      Add metadata
+    <YouToggle v-model="shouldAddMetadata" name="toggle-metadata" class="mb-4">
+      Add custom file metadata
     </YouToggle>
     <YouButton type="submit">Convert</YouButton>
   </form>
