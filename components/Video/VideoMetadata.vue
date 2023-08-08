@@ -11,11 +11,15 @@
 </template>
 
 <script setup lang="ts">
+const emits = defineEmits(['fetching']);
+
 const metadata = useMetadata();
 const downloadFile = useDownloadFile();
 
 const submit = async () => {
+  emits('fetching', true);
   const query = { ...metadata.value };
   downloadFile.value = await $fetch('/api/audio/download', { query });
+  emits('fetching', false);
 };
 </script>
