@@ -1,8 +1,8 @@
 <template>
   <main class="h-screen" :class="{ 'overflow-scroll': shouldDisplayMetadata }">
+    <YouLoader v-if="isLoading" />
     <div class="h-screen flex items-center justify-center flex-col">
       <VideoUrl @fetching="isLoading = $event" />
-      <YouLoader v-if="isLoading" />
       <VideoMetadata v-if="shouldDisplayMetadata" />
       <VideoDownload v-if="shouldDisplayDownload" />
     </div>

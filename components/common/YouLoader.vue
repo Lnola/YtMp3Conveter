@@ -1,9 +1,10 @@
 <template>
-  <div class="text-center">
-    <div role="status">
+  <div class="absolute inset-0 flex items-center justify-center">
+    <div class="absolute inset-0 z-10 bg-gray-700 opacity-30"></div>
+    <div role="status" class="text-center z-20">
       <svg
         aria-hidden="true"
-        class="inline w-8 h-8 mr-2 text-gray-200 animate-spin fill-orange"
+        class="inline w-16 h-16 mr-2 text-white animate-spin fill-orange"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
