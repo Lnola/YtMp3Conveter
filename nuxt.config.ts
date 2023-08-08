@@ -7,4 +7,5 @@ export default defineNuxtConfig({
     enabled: false,
   },
   modules: ['@nuxtjs/tailwindcss'],
+  components: ['~/components', '~/components/common'],
 });
