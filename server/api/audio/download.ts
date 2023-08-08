@@ -42,5 +42,5 @@ export default defineEventHandler(async (event): Promise<DownloadFile> => {
   const outputFile = `/audio/${filename}.mp3`;
   const stream = ytdl(videoUrl, { filter: 'audioonly' });
   await formatAndSaveFile(stream, query, outputFile);
-  return { outputUrl: outputFile };
+  return { outputUrl: outputFile, filename };
 });

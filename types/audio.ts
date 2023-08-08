@@ -10,4 +10,5 @@ export type Metadata = {
 
 export type DownloadFile = {
   outputUrl: string;
+  filename: string;
 };
