@@ -6,12 +6,14 @@
 </template>
 
 <script setup lang="ts">
+import { Nullable } from 'types/helper';
+
 const emits = defineEmits(['update:modelValue']);
 defineProps({
   modelValue: { type: String, required: true },
 });
 
-const inputRef = ref<HTMLInputElement | null>(null);
+const inputRef = ref<Nullable<HTMLInputElement>>(null);
 
 const select = () => {
   if (!inputRef.value) return;
