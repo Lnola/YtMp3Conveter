@@ -1,7 +1,7 @@
 import ytdl from 'ytdl-core';
 import ffmpeg from 'fluent-ffmpeg';
 import { Readable } from 'stream';
-import { Metadata } from '../../../types/audio';
+import { DownloadFile, Metadata } from '../../../types/audio';
 
 type Query = Metadata;
 
@@ -37,10 +37,10 @@ const formatAndSaveFile = (
   );
 };
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (event): Promise<DownloadFile> => {
   const { videoUrl, filename, ...query } = getQuery(event) as Query;
   const outputFile = `/audio/${filename}.mp3`;
   const stream = ytdl(videoUrl, { filter: 'audioonly' });
   await formatAndSaveFile(stream, query, outputFile);
-  return { outputFile };
+  return { outputUrl: outputFile };
 });

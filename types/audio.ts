@@ -7,3 +7,7 @@ export type Metadata = {
   thumbnail: string;
   title: string;
 };
+
+export type DownloadFile = {
+  outputUrl: string;
+};
