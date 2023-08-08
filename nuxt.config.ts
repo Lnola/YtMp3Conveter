@@ -6,6 +6,6 @@ export default defineNuxtConfig({
   devtools: {
     enabled: false,
   },
-  modules: ['@nuxtjs/tailwindcss'],
+  modules: ['@nuxtjs/tailwindcss', '@vueuse/nuxt'],
   components: ['~/components', '~/components/common'],
 });
