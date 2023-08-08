@@ -32,8 +32,7 @@ const fetchMetadata = async () => {
 
 const fetchDownloadFile = async () => {
   const query = { videoUrl: videoUrl.value };
-  const data = await $fetch('/api/audio/download', { query });
-  downloadFile.value = data;
+  downloadFile.value = await $fetch('/api/audio/download', { query });
 };
 
 const submit = async () => {

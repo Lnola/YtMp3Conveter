@@ -12,10 +12,10 @@
 
 <script setup lang="ts">
 const metadata = useMetadata();
+const downloadFile = useDownloadFile();
 
 const submit = async () => {
   const query = { ...metadata.value };
-  const data = await $fetch('/api/audio/download', { query });
-  console.log(data);
+  downloadFile.value = await $fetch('/api/audio/download', { query });
 };
 </script>
