@@ -9,7 +9,11 @@
       <VideoUrl @fetching="isLoading = $event" />
     </div>
     <div class="h-screen flex items-center justify-center flex-col">
-      <VideoMetadata ref="metadataRef" v-if="shouldDisplayMetadata" />
+      <VideoMetadata
+        ref="metadataRef"
+        v-if="shouldDisplayMetadata"
+        @fetching="isLoading = $event"
+      />
     </div>
     <div class="h-screen flex items-center justify-center flex-col">
       <VideoDownload v-if="shouldDisplayDownload" />
