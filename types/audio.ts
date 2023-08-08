@@ -6,6 +6,8 @@ export type Metadata = {
   filename: string;
   thumbnail: string;
   title: string;
+  year: string;
+  genre: string;
 };
 
 export type DownloadFile = {

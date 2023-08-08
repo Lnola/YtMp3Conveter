@@ -9,6 +9,8 @@ const initMetadata = (): Metadata => ({
   filename: '',
   thumbnail: '',
   title: '',
+  year: '',
+  genre: '',
 });
 
 const initDownloadFile = (): Nullable<DownloadFile> => null;
