@@ -7,11 +7,9 @@
       :src="embededVideo"
     ></iframe>
     <div class="flex gap-6">
-      <YouButton
-        :href="downloadFile.outputUrl"
-        :download="downloadFile.filename"
-        >Download
-      </YouButton>
+      <YouDownload :href="downloadFile.outputUrl" download>
+        Download
+      </YouDownload>
       <YouButton @click="emits('retry')" variant="SECONDARY">
         Try again
       </YouButton>
