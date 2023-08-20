@@ -51,10 +51,11 @@ watch(downloadRef, scrollIntoDownload);
 
 const retry = () => {
   scrollToTop();
+  const timeout = shouldDisplayMetadata && shouldDisplayDownload ? 900 : 450;
   setTimeout(() => {
     resetMetadata();
     resetDownloadFile();
-  }, 1000);
+  }, timeout);
 };
 </script>
 
