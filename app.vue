@@ -2,7 +2,9 @@
   <main
     ref="scrollRef"
     class="h-screen"
-    :class="{ 'overflow-scroll': shouldDisplayMetadata }"
+    :class="{
+      'overflow-scroll': shouldDisplayMetadata || shouldDisplayDownload,
+    }"
   >
     <YouLoader v-if="isLoading" />
     <div class="h-screen flex items-center justify-center flex-col">
