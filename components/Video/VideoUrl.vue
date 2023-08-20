@@ -4,7 +4,7 @@
     class="w-3/4 flex items-center justify-center flex-col"
   >
     <YouInput
-      v-model="videoUrl"
+      v-model="metadata.videoUrl"
       name="video-link"
       label="Youtube video link"
       class="mb-6 w-full"
@@ -20,19 +20,18 @@
 const emits = defineEmits(['fetching']);
 
 const shouldAddMetadata = ref(false);
-const videoUrl = ref('');
 const metadata = useMetadata();
 const downloadFile = useDownloadFile();
 
 const fetchMetadata = async () => {
-  const query = { videoUrl: videoUrl.value };
+  const query = { videoUrl: metadata.value.videoUrl };
   const data = await $fetch('/api/audio/metadata', { query });
   metadata.value = { ...metadata.value, ...data };
   resetDownloadFile();
 };
 
 const fetchDownloadFile = async () => {
-  const query = { videoUrl: videoUrl.value };
+  const query = { videoUrl: metadata.value.videoUrl };
   downloadFile.value = await $fetch('/api/audio/download', { query });
 };
 
@@ -42,7 +41,6 @@ const submit = async () => {
     ? fetchMetadata
     : fetchDownloadFile;
   await fetchMethod();
-  videoUrl.value = '';
   emits('fetching', false);
 };
 </script>
