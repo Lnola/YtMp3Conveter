@@ -28,6 +28,7 @@ const fetchMetadata = async () => {
   const query = { videoUrl: videoUrl.value };
   const data = await $fetch('/api/audio/metadata', { query });
   metadata.value = { ...metadata.value, ...data };
+  resetDownloadFile();
 };
 
 const fetchDownloadFile = async () => {
