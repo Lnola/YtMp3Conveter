@@ -16,6 +16,9 @@ const initMetadata = (): Metadata => ({
 const initDownloadFile = (): Nullable<DownloadFile> => null;
 
 export const useMetadata = () => useState<Metadata>('metadata', initMetadata);
+export const resetMetadata = () => (useMetadata().value = initMetadata());
 
 export const useDownloadFile = () =>
   useState<Nullable<DownloadFile>>('download-file', initDownloadFile);
+export const resetDownloadFile = () =>
+  (useDownloadFile().value = initDownloadFile());

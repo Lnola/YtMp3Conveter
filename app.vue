@@ -20,7 +20,7 @@
       ref="downloadRef"
       class="h-screen flex items-center justify-center flex-col"
     >
-      <VideoDownload @retry="scrollToTop" />
+      <VideoDownload @retry="retry" />
     </div>
   </main>
 </template>
@@ -33,7 +33,7 @@ const isLoading = ref(false);
 const metadata = useMetadata();
 const shouldDisplayMetadata = computed(() => metadata.value.artist.length > 0);
 const downloadFile = useDownloadFile();
-const shouldDisplayDownload = computed(() => downloadFile.value);
+const shouldDisplayDownload = computed(() => !!downloadFile.value);
 
 const scrollRef = ref<Nullable<HTMLElement>>(null);
 const metadataRef = ref<Nullable<HTMLElement>>(null);
@@ -41,12 +41,19 @@ const downloadRef = ref<Nullable<HTMLElement>>(null);
 const { x: _, y: scrollHeight } = useScroll(scrollRef, { behavior: 'smooth' });
 
 const scrollToTop = () => (scrollHeight.value = 0);
-
 const scrollIntoMetadata = () => (scrollHeight.value = window.innerHeight);
 const scrollIntoDownload = () => (scrollHeight.value = window.innerHeight * 2);
 
 watch(metadataRef, scrollIntoMetadata);
 watch(downloadRef, scrollIntoDownload);
+
+const retry = () => {
+  scrollToTop();
+  setTimeout(() => {
+    resetMetadata();
+    resetDownloadFile();
+  }, 1000);
+};
 </script>
 
 <style>
