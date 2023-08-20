@@ -1,9 +1,17 @@
+import fs from 'fs';
 import ytdl from 'ytdl-core';
 import ffmpeg from 'fluent-ffmpeg';
 import { Readable } from 'stream';
 import { DownloadFile, Metadata } from '../../../types/audio';
 
 type Query = Metadata;
+
+const deleteFile = (outputFile: string) => {
+  fs.unlink(`public/${outputFile}`, (err) => {
+    if (err) throw err;
+    console.log('Deleted file successfully!');
+  });
+};
 
 const formatAndSaveFile = (
   stream: Readable,
@@ -34,6 +42,10 @@ const formatAndSaveFile = (
       })
       .on('end', () => {
         console.log('File saved successfully.');
+
+        setTimeout(() => {
+          deleteFile(outputFile);
+        }, 60000);
         resolve();
       })
   );
@@ -42,6 +54,7 @@ const formatAndSaveFile = (
 export default defineEventHandler(async (event): Promise<DownloadFile> => {
   const { videoUrl, filename, ...query } = getQuery(event) as Query;
   const outputFile = `/audio/${filename}.mp3`;
+  console.log('Conversion started!');
   const stream = ytdl(videoUrl, { filter: 'audioonly' });
   await formatAndSaveFile(stream, query, outputFile);
   return { outputUrl: outputFile, filename };
